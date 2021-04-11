@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cd $i
+
+flag=0
+
+for i in * #i rappresenta ogni file o directory in questa directory
+	do
+	if test -x $1 -a -f $1 #se è file e leggibile
+	then
+		if test `wc -l < $i` = $2 #se ha $2 linee
+		then
+			for j in `cat $i`
+			do
+				if grep [!0-9] $j
+				then
+					flag=1
+ 					break;
+				fi
+			done
+			if test $flag = 0
+			then
+				
+				echo `ls 
+
+		fi
+	fi
