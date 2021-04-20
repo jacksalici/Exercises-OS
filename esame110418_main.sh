@@ -22,9 +22,7 @@ primo=$1
 shift
 
 
-#controllo che il primo sia un nome assoluto
-
-
+#controllo che i param rimanenti siano  nomi assoluti
 for i in $*
 do
  	case $i in
@@ -51,7 +49,7 @@ export PATH
 >/tmp/f$$.txt
 file=/tmp/f$$.txt
 
-#Passo al file comandi ricorsivo rispettivamente: la gerarchia su cui operare, il numero di righe che deve avere ciascun file e il nome del file temporaneo
+#Passo al file comandi ricorsivo i parametri
 for i in $*
 do
  	esame110418_rec.sh $primo $i $file

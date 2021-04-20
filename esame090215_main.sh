@@ -24,7 +24,7 @@ then
 	exit 3
 fi
 
-#controllo sai un numero positivo
+#controllo se $2 è un numero positivo
 case $2 in 
 *[!0-9]*) echo $2 non numerico positivo
 	exit 4;;
@@ -42,7 +42,7 @@ export PATH
 file=/tmp/$$.txt
 >$file
 
-#Passo al file comandi ricorsivo rispettivamente: la gerarchia su cui operare, il numero di righe che deve avere ciascun file e il nome del file temporaneo
+#Passo al file comandi ricorsivo rispettivamente.
 esame090215_rec.sh $1 $2 $file
 
 #stampo a video il file temporaneo per poi rimuoverlo.
@@ -59,6 +59,8 @@ do
 	valori="$valori $z $num"
 done
 
+
+#stampo i risultati e rimuovo il file
 echo VALORI PASSABILI:
 echo $valori
 rm $file

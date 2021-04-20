@@ -8,7 +8,7 @@ then
 fi
 
 
-#controllo che il primo sia un nome assoluto
+#controllo che, eccetto l'ultimo, siano nomi assoluti
 
 j=1
 
@@ -48,7 +48,7 @@ export PATH
 file1=/tmp/f$$.txt
 file2=/tmp/f2$$.txt
 
-#Passo al file comandi ricorsivo rispettivamente: la gerarchia su cui operare, il numero di righe che deve avere ciascun file e il nome del file temporaneo
+#Passo al file comandi ricorsivo rispettivamente i parametri richiesti
 j=1
 for i in $*
 do
@@ -62,6 +62,8 @@ fi
 
 done
 
+
+#stampo a video i risultati
 echo N FILE TROVATI: `wc -l < $file1`
 e=1
 for i in `cat $file1`
@@ -71,14 +73,14 @@ do
 		e=`expr $e + 1` 
 
 		echo vuoi ordinare il file? s/n
-read s
+		read s
 
-	if test $s = s
-	then 
-			echo `sort -f $i`
-	else
-		echo "sorting aborted"
-	fi
+		if test $s = s
+		then 
+				echo `sort -f $i`
+		else
+			echo "sorting aborted"
+		fi
 done
 		
 	

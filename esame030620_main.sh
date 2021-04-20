@@ -19,7 +19,7 @@ C=$1
 shift
 
 
-#controllo che siano nomi assoluto
+#controllo che siano nomi assoluti
 for i in $*
 do
  	case $i in
