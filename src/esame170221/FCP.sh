@@ -54,6 +54,7 @@ export PATH
 file=/tmp/$$.txt
 >$file
 
+#organizzo in più fasi la chiamata del file ricorsivo
 for i in $*
 do
     FCR.sh $H $K $i $file 
