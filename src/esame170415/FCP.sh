@@ -62,7 +62,7 @@ do
 	if test $is_first != 0
 	then
 
-	esame170415_rec.sh $1 $k $file
+	FCR.sh $1 $k $file
 
 	fi
 	is_first=1

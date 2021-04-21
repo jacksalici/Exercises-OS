@@ -32,6 +32,6 @@ do
     if 
         test -d $i -a -x $i
     then
-       esame170221_rec.sh $H $K `pwd`/$i $file   
+      FCR.sh $H $K `pwd`/$i $file   
     fi
 done

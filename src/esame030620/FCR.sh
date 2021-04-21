@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#esame030620_rec.sh $C $i $file
+#FCR.sh $C $i $file
 cd $2
 
 for i in *
@@ -13,6 +13,6 @@ do
         *) ;;
         esac
         echo ciao $i
-        esame030620_rec.sh $1 $i $3
+        FCR.sh $1 $i $3
     fi
 done

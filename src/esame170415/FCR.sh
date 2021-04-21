@@ -34,7 +34,7 @@ do
 	if test -r $k -a -d $k #accertandomi che sia una cartella e sia leggibile
 	then
 	
-		esame170415_rec.sh $1 `pwd`/$k $3
+		FCR.sh $1 `pwd`/$k $3
 	fi
 done 
 

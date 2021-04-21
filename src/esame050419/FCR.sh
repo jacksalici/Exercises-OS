@@ -1,5 +1,5 @@
 #/bin/sh
-#esame110418_rec.sh $i $ultimo $file
+#FCR.sh $i $ultimo $file
 
 
 cd $1
@@ -24,6 +24,6 @@ do
     if 
         test -d $i -a -x $i
     then
-        esame050419_rec.sh `pwd`/$i $2 $3 $4
+        FCR.sh `pwd`/$i $2 $3 $4
     fi
 done

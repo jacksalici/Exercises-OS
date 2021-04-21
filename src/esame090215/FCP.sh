@@ -43,7 +43,7 @@ file=/tmp/$$.txt
 >$file
 
 #Passo al file comandi ricorsivo rispettivamente.
-esame090215_rec.sh $1 $2 $file
+FCR.sh $1 $2 $file
 
 #stampo a video il file temporaneo per poi rimuoverlo.
 echo FILE TROVATI

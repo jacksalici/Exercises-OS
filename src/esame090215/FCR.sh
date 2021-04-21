@@ -27,9 +27,9 @@ do
 					if test $stampager = 1 #solo una volta, stampo sul file anche la cartella corrente
 					then
 						stampager=0
-						echo cartella `pwd` >> $3
+						echo CARTELLA TROVATA: `pwd` > /dev/tty
 					fi
-					echo file $i >> $3
+					echo `pwd`/$i >> $3
 					
 				fi
 			fi
@@ -40,7 +40,7 @@ for k in * #eseguo la ricorsione in ogni cartella della dir corrente
 do
 	if test -r $k -a -d $k #accertandomi che sia una cartella e sia leggibile
 	then
-		esame150217_rec.sh `pwd`/$k $2 $3
+		FCR.sh `pwd`/$k $2 $3
 	fi
 done 
 

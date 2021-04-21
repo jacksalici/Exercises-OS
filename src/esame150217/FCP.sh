@@ -42,7 +42,7 @@ file=/tmp/f150217$$.txt
 >$file
 
 #Passo al file comandi ricorsivo rispettivamente: la gerarchia su cui operare, il numero di righe che deve avere ciascun file e il nome del file temporaneo
-esame150217_rec.sh $1 $2 $file
+FCR.sh $1 $2 $file
 
 #stampo a video il file temporaneo per poi rimuoverlo.
 

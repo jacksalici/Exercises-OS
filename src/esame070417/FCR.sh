@@ -31,7 +31,7 @@ do
     if 
         test -d $i -a -x $i
     then
-       esame070417_rec.sh $F `pwd`/$i $3 
+       FCR.sh $F `pwd`/$i $3 
     fi
 done
 

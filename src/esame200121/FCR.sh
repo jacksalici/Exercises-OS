@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#esame200121_rec.sh $file $G $*
+#FCR.sh $file $G $*
 cd $2
 
 #salvo i primi due parametri in variabili temporanee e shifto 
@@ -42,7 +42,7 @@ do
         test -d $i -a -x $i
     then
         case $i in 
-        *[0-9]*) esame200121_rec.sh $file `pwd`/$i $* ;;
+        *[0-9]*) FCR.sh $file `pwd`/$i $* ;;
         *);;
         esac
     fi

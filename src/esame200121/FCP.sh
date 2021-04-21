@@ -41,7 +41,7 @@ file=/tmp/$$.txt
 
 
 #Passo al file comandi ricorsivo rispettivamente: 
-esame200121_rec.sh $file $G $*
+FCR.sh $file $G $*
 
 
 echo DIR TROVATE `wc -l < $file`

@@ -7,22 +7,19 @@ then
 	exit 1
 fi
 
-#controllo sai un numero positivo
+#controllo che il primo sia un carattere
 case $1 in 
-*[!0-9]*) echo $1 non numerico positivo
-	exit 4;;
-*)	if test $1 -eq 0
-	then echo non positivo
-	fi
+?) ;;
+*)	echo $1 deve essere un carattere
 ;;
 esac
 
 #salvo $1 nella var primo e shifto i parametri
-primo=$1
+C=$1
 shift
 
 
-#controllo che i param rimanenti siano  nomi assoluti
+#controllo che siano nomi assoluti
 for i in $*
 do
  	case $i in
@@ -46,22 +43,31 @@ PATH=`pwd`:$PATH
 export PATH
 
 #creo un file per contare globalmente i file
->/tmp/f$$.txt
-file=/tmp/f$$.txt
 
-#Passo al file comandi ricorsivo i parametri
+file=/tmp/nomiAssoluti
+>$file
+#Passo al file comandi ricorsivo rispettivamente:
 for i in $*
 do
- 	esame110418_rec.sh $primo $i $file
+ 	FCR.sh $C $i $file
 done
 
-echo FILE CREATI `wc -l < $file`
+echo DIRECTORY TROVATE `wc -l < $file` >/dev/tty
+
 
 for i in `cat $file`
 do
-	echo FILE $i
-	cat $i
-	echo "########"
-	rm $i
+	echo DIRECTORY $i >/dev/tty
+	echo visualizzare contenuto? >/dev/tty
+	read elena 
+
+
+    if test $elena = s
+    then 
+    echo `ls -a $i`
+    fi
+	
 done
+
+rm $file
 

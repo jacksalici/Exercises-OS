@@ -56,7 +56,7 @@ file=/tmp/$$.txt
 
 for i in $*
 do
-    esame170221_rec.sh $H $K $i $file 
+    FCR.sh $H $K $i $file 
 done
 
 

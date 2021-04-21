@@ -55,7 +55,7 @@ do
 if test $j -ne $#
 then
 
- 	esame050419_rec.sh $i $ultimo $file1 $file2
+ 	FCR.sh $i $ultimo $file1 $file2
 	j=`expr $j + 1`
 
 fi

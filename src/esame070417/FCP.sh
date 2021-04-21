@@ -42,7 +42,7 @@ file=/tmp/$$.txt
 
 for i in $*
 do
-    esame070417_rec.sh $F $i $file 
+    FCR.sh $F $i $file 
 done
 
 

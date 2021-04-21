@@ -1,5 +1,5 @@
 #/bin/sh
-#esame110418_rec.sh $primo $i $file
+#FCR.sh $primo $i $file
 
 
 cd $2
@@ -40,6 +40,6 @@ do
     if 
         test -d $i -a -x $i
     then
-        esame110418_rec.sh $1 `pwd`/$i $3
+        FCR.sh $1 `pwd`/$i $3
     fi
 done
