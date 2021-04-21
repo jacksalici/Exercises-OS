@@ -25,11 +25,11 @@ case $1 in     #controllo che il nome sia assoluto e la directory navigavile
 	then echo $1 non direttorio o non accessibile >&2 
 	exit 2; 
 	fi;; 
-*)echo argomento sbagliato: $1 non assoluto >&2 
-exit 3;; 
+*) echo argomento sbagliato: $1 non assoluto >&2 
+exit 3; ; 
 esac 
 
-#controllo che tutti i parametri, eccetto l'ultimo che salverò in LAST, siano nomi assoluti e directory navigabili
+#controllo che tutti i parametri, eccetto lultimo che salverò in LAST, siano nomi assoluti e directory navigabili
 j=1
 
 for i in $*
@@ -75,6 +75,18 @@ case $3 in #controllo che $3 sia relativo semplice
 		exit 6;; 
 	*) ;; 
 esac #in questo caso NON si può controllare né che sia un file né che sia un direttorio!
+
+
+#controllo che i param rimanenti siano nomi assoluti
+for i in $*
+do
+		case $i in
+        /*);;
+        *)	 echo  $i deve essere un nome assoluto
+            	exit 3
+        ;; 
+        esac
+done
 
 	#CONTROLLO NUMERICO
 
