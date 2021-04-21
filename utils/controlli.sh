@@ -118,8 +118,13 @@ esac
 
 
 
+	#CHIAMATA RICORSIVA
 
-
+#organizzo in più fasi la chiamata del file ricorsivo
+for i in $*
+do
+    FCR.sh $H $K $i $file 
+done
 
 
 	#FAC SIMILE FCP.sh
