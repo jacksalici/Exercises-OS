@@ -56,27 +56,6 @@ LAST=$i
 fi
 done
 
-	#CONTROLLO NOME ASSOLUTO E FILE
-
-#controllo che il nome sia assoluto e sia un file
-case $2 in    
-/*)   	if test ! -f $2    
-	then     echo $2 non file >&2 
-	exit 4 fi;; 
-	*)    echo argomento sbagliato: $1 non assoluto >&2 
-	exit 5;; 
-esac
-
-	#CONTROLLO NOME RELATIVO SEMPLICE
-
-
-case $3 in #controllo che $3 sia relativo semplice
-	*/*) 	echo argomento sbagliato: $3 nome non relativo semplice >&2
-		exit 6;; 
-	*) ;; 
-esac #in questo caso NON si può controllare né che sia un file né che sia un direttorio!
-
-
 #controllo che i param rimanenti siano nomi assoluti
 for i in $*
 do
@@ -88,13 +67,42 @@ do
         esac
 done
 
+	#CONTROLLO NOME ASSOLUTO E FILE
+
+#controllo che il nome sia assoluto e sia un file
+case $2 in    
+/*)   	if test ! -f $2    
+	then     echo $2 non file >&2 
+	exit 4 fi;; 
+	*)    echo argomento sbagliato: $1 non assoluto >&2 
+	exit 5;; 
+esac
+
+
+
+
+	#CONTROLLO NOME RELATIVO SEMPLICE
+
+case $3 in #controllo che $3 sia relativo semplice
+	*/*) 	echo argomento sbagliato: $3 nome non relativo semplice >&2
+		exit 6;; 
+	*) ;; 
+esac #in questo caso NON si può controllare né che sia un file né che sia un direttorio!
+
+
+
+
 	#CONTROLLO NUMERICO
 
 
-case  $4 in #controllo che il parametro $4 sia numerico
-*[!0-9]*)  	echo Errore in argomento numerico: $4 >&2 
-		exit 7;; 
-*)    ;;      # tutti i caratteri sono numerici
+#controllo se $2 è un numero strettamente positivo
+case $2 in 
+*[!0-9]*) echo $2 non numerico positivo
+	exit 4;;
+*)	if test $2 -eq 0
+	then echo non positivo
+	fi
+;;
 esac
 
 
