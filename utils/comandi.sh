@@ -81,6 +81,8 @@ tail
 
 rev #ribalta cio che gli viene ridiretto
 
+basename
+
 tee
 
  # per redirigere tutto: ls -l z* p* > file3  2>&1
