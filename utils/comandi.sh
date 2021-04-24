@@ -13,18 +13,24 @@ ls #disponde le cartelle
 	-R #recursive
 	-i #inunber
 
-cat
 
+#STAMPA
+cat 
 echo
+more
 
-mv
+#OPERAZIONI SUI FILE
+
+mv #sposta e rinomina
 
 rm #remove
 	-i #interactive
 	-r #recursive * cartelle
 
-ln link
+ln #link
 	-s #software
+
+touch #rinnova l'ultima modifica
 
 #COMMANDS
 
@@ -35,15 +41,15 @@ whereis #same
 
 who #utenti collegati
 w #quite the same
+chmod #modifica i diritti
+#[u g o a] [+ -] [rwx]
 
-
+#VARIABILI
 export #per esportare variabili
 env #per visualizzare var d'ambiente
 unset #elimina variabile
 
-
-touch
-
+#PROCESSI
 ps #processi in esec
 	-f #full, con anche altri dettagli
 	-l #ancora piu dettagli
@@ -70,20 +76,21 @@ grep
 	#ritorna 0 se trova almeno un pattern, 1 se non trova nulla
 
 wc	#con nome del file normalmente, senza con  ridirezione
-	-c
-	-w
-	-l
+	-c #conta caratteri
+	-w #parole
+	-l #lines
 
-head
+
+head #mostra le prime num righe
 	-num
 
-tail
+tail #mostra le ultime -num righe
 
 rev #ribalta cio che gli viene ridiretto
 
-basename
+basename #output solo il nome base di un file cartelle
 
-tee
+tee 
 
  # per redirigere tutto: ls -l z* p* > file3  2>&1
 
@@ -91,10 +98,8 @@ date
 
 diff
 
-chmod
-	[u g o a] [+ -] [rwx]
 
-#shabang  #!/bin/sh
+
 
 expr
 
@@ -105,3 +110,4 @@ $? #valore di ritorno ultimo carattere
 shift
 set
 
+#shabang  #!/bin/sh
