@@ -30,6 +30,7 @@ ln link
 
 which #where is a command
 whereis #same
+id #show UID and GID
 
 #USER AND RIGHTS
 
