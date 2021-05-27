@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
     
 //ALLOCAZIONE MEMORIA MALLOC
 
-    /* allocazione pipe */
+    /* allocazione N pipe */
     if ((pipes=(pipe_t *)malloc(N*sizeof(pipe_t))) == NULL)
     {
     	printf("Errore allocazione pipe\n");
@@ -71,15 +71,7 @@ int main(int argc, char *argv[])
     	exit(4);
     }
 
-    /* alloco l'array di pipe */
-    p = (pipe_t *)malloc(sizeof(pipe_t) * N);
-        
-    if (p == NULL)
-    { 
-        printf("Errore nella creazione array dinamico\n");
-        exit(1);
-    }
-    
+
     /* padre aggancia le due funzioni (scrivi e salta) che useranno i figli alla ricezione dei segnali inviati dal padre */
     signal(SIGUSR1,scrivi);
     signal(SIGUSR2,salta);
@@ -189,4 +181,46 @@ int main(int argc, char *argv[])
         }
         exit(0);
     }
-}
+
+/* prima creiamo la pipe di comunicazione fra nipote e figlio */
+		  	if (pipe(p) < 0)
+                	{	
+                        	printf("Errore nella creazione della pipe fra figlio e nipote!\n");
+                        	exit(-2);
+                	}
+
+			if ( (pid = fork()) < 0)
+			{
+				printf("Errore nella fork di creazione del nipote\n");
+				exit(-3);
+			}	
+			if (pid == 0) 
+			{
+			/* codice del nipote */
+			printf("Sono il processo nipote del figlio di indice %d e pid %d e sto per recuperare l'ultima linea del file %s\n", j, getpid(), argv[j+1]);
+				/* chiusura della pipe rimasta aperta di comunicazione fra figlio-padre che il nipote non usa */
+				close(piped[j][1]);
+				/* Ridirezione dello standard input (si poteva anche non fare e passare il nome del file come ulteriore parametro della exec):  il file si trova usando l'indice i incrementato di 1 (cioe' per il primo processo i=0 il file e' argv[1]) */
+				close(0);
+				if (open(argv[j+1], O_RDONLY) < 0)
+				{
+                                printf("Errore nella open del file %s\n", argv[j+1]);
+                                exit(-4);
+                        	}
+				/* ogni nipote deve simulare il piping dei comandi nei confronti del figlio e quindi deve chiudere lo standard output e quindi usare la dup sul lato di scrittura della propria pipe */
+				close(1);
+				dup(p[1]); 			
+				/* ogni nipote adesso puo' chiudere entrambi i lati della pipe: il lato 0 non viene usato e il lato 1 viene usato tramite lo standard output */
+				close(p[0]);
+				close(p[1]);
+				/* Ridirezione dello standard error su /dev/null (per evitare messaggi di errore a video) */
+				close(2);
+				open("/dev/null", O_WRONLY);
+			
+				/* Il nipote diventa il comando wc -1 */				
+				execlp("wc", "wc", "-l", (char *)0);
+				/* attenzione ai parametri nella esecuzione di wc: aolo -1 e terminatore della lista. */ 
+				
+				/* Non si dovrebbe mai tornare qui!!: ATTENZIONE avendo chiuso lo standard output e lo standard error NON si possono fare stampe con indicazioni di errori; nel caso, NON chiudere lo standard error e usare perror o comunque write su 2 */
+				exit(-1); 
+			}
