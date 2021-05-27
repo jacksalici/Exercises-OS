@@ -8,10 +8,16 @@
 #include <sys/wait.h>
 
 typedef int pipe_t[2];
+typedef struct{
+    int id; 	/* indice figlio (campo c1 del testo) */
+	int num; 	/* numero caratteri (campo c2 del testo) */
+} s_occ;
 
 int main(int argc, char *argv[])
 {
     int pid;      /* pid per fork */
+   	int *pid;	/* array di pid */
+
     int N;   /* numero di caratteri e quindi numero di processi */
     int fdr;      /* per open */
     int i, k;     /* indici, i per i figli! */
@@ -74,49 +80,11 @@ int main(int argc, char *argv[])
         exit(1);
     }
     
+    /* padre aggancia le due funzioni (scrivi e salta) che useranno i figli alla ricezione dei segnali inviati dal padre */
+    signal(SIGUSR1,scrivi);
+    signal(SIGUSR2,salta);
 
-
-//CREAZIONE PIPE ...da sistemare da qui
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//CREAZIONE PIPE 
 
     /* creo N pipe */
     for (i=0; i < N; i++)
@@ -126,6 +94,10 @@ int main(int argc, char *argv[])
             exit(1);
         }
     
+
+//CREAZIONE FIGLI
+
+
     printf("Sono il processo padre con pid%d e sto per generare %d figli\n", getpid(), N);
     for (i=0; i < N; i++)
     {/* creazione dei figli */
@@ -163,10 +135,11 @@ int main(int argc, char *argv[])
                 if (c == argv[i+2][0])
                     cont++;
             }
+            //attendo segnale dal padre
+            pause();
 
             /* comunica al padre usando la i-esima pipe */
             write(p[i][1], &cont, sizeof(cont));
-            
             exit(0);
         }
     }
@@ -182,8 +155,20 @@ int main(int argc, char *argv[])
     for (i=0; i < N; i++)
     {
         if (read(p[i][0], &cont, sizeof(int)) > 0)
-            printf("%d  occorrenze  del  carattere  %c  nel  file  %s\n",  cont, argv[i+2][0], argv[1]);}
-            
+            printf("%d  occorrenze  del  carattere  %c  nel  file  %s\n",  cont, argv[i+2][0], argv[1]);
+
+//SEGNALI
+    /* il padre deve mandare il segnale che corrisponde a scrivi solo al processo di cui gli e' arrivato l'indice, mentre agli altri deve mandare il segnale che corrisponde a salta */
+
+		sleep(1); /* per sicurezza */
+		if (i==pip.id)
+			kill(pid[i],SIGUSR1);
+		else
+			kill(pid[i],SIGUSR2);
+	}	
+
+
+//ATTESA TERMINAZIONE DEI FIGLI   
         /* Attesa della terminazione dei figli */
         
         for(i=0;i < N;i++)
