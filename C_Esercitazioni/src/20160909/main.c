@@ -6,6 +6,8 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <stdbool.h>
+#define N 26
+
 typedef int pipe_t[2];
 typedef struct{
     char id;      	/* indice figlio (campo v1 del testo) */
@@ -42,16 +44,16 @@ void bubbleSort(s_occ o[], int dim){
 int main(int argc, char *argv[])
 {
     
-   	int *pid;	/* array di pid */
+   	int pid[26];	/* array di pid */
 
-    int N;   /* numero di caratteri e quindi numero di processi */
+   
     int fdr;      /* per open */
     int i, k, j=0;     /* indici, i per i figli! */
     long int cont;     /* per conteggio */
     char c;       /* per leggere dal file */
-    pipe_t *p;    /* array dinamico di pipe */
+    pipe_t p[26];    /* array  di pipe */
     int pidFiglio, status, ritorno;    /* variabili per wait*/
-    s_occ *o;   /*array dinamico di strutture*/
+    s_occ o[26];   /*array di strutture*/
 
 
 
@@ -63,25 +65,8 @@ int main(int argc, char *argv[])
         
     }
     
-    N = 26; // N numero figli
+  
     
-
-    /* allocazione N pipe */
-    if ((p=(pipe_t *)malloc(N*sizeof(pipe_t))) == NULL)
-    {
-    	printf("Errore allocazione pipe\n");
-    	exit(3); 
-    }
-
-
-    /* allocazione pid */
-    if ((pid=(int *)malloc(N*sizeof(int))) == NULL)
-    {
-    	printf("Errore allocazione pid\n");
-    	exit(4);
-    }
-
-
 
     /* creo N pipe */
     for (i=0; i < N; i++)
@@ -139,13 +124,6 @@ int main(int argc, char *argv[])
                 cont++;
         }
 
-        /* allocazione N array */
-        if ((o=(s_occ *)malloc(N*sizeof(s_occ))) == NULL)
-        {
-    	    printf("Errore allocazione pipe\n");
-    	    exit(-1); 
-        }
-
         if (i!=0){
             read(p[i-1][0], o, N*sizeof(s_occ)); //manca controllo
         }
@@ -171,13 +149,6 @@ int main(int argc, char *argv[])
     }
    
   
-    /* allocazione N array */
-        if ((o=(s_occ *)malloc(N*sizeof(s_occ))) == NULL)
-        {
-    	    printf("Errore allocazione pipe padre\n");
-    	    exit(-1); 
-        }
-
     /* legge dalle pipe i messaggi */
 
     read(p[N-1][0], o, N*sizeof(s_occ));
