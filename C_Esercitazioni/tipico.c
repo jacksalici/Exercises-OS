@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+/* mancano delle librerie !*/
 
 typedef int pipe_t[2];
 typedef struct{
@@ -58,7 +59,7 @@ int main(int argc, char *argv[])
 //ALLOCAZIONE MEMORIA MALLOC
 
     /* allocazione N pipe */
-    if ((pipes=(pipe_t *)malloc(N*sizeof(pipe_t))) == NULL)
+    if ((p=(pipe_t *)malloc(N*sizeof(pipe_t))) == NULL)
     {
     	printf("Errore allocazione pipe\n");
     	exit(3); 
