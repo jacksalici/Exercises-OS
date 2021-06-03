@@ -60,11 +60,12 @@ int main(int argc, char *argv[])
 	//CREAZIONE PIPE 
 
     /* OBBLIGATORIO: creo N pipe */
-    for (i=0; i < N; i++)
+    for (i=0; i < N; i++) {
         if (pipe(piped[i]) < 0)        {
             printf("Errore nella creazione della pipe\n");
             exit(1);
         }
+	}
 
 	printf("Sono il processo padre con pid%d e sto per generare %d figli\n", getpid(), N);
     for (i=0; i < N; i++) {
