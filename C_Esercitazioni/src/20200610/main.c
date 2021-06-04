@@ -10,11 +10,6 @@
 
 typedef int pipe_t[2];
 
-typedef struct{
-    			/*  */
-	 			/*  */
-} s_occ;
-
 int main(int argc, char *argv[])
 {
     int pid;      						/* pid per fork */
