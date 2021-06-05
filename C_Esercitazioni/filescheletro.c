@@ -15,8 +15,7 @@ typedef struct{
 	 			/*  */
 } s_occ;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     int pid;      						/* pid per fork */
    	int *pid;							/* array di pid */
 
@@ -94,6 +93,7 @@ int main(int argc, char *argv[])
 	}
 
 	/* padre */
+	printf("Padre con PID: %d\n", getpid());
     
     /* OBBLIGATORIO: chiude tutte le pipe che non usa */
 
