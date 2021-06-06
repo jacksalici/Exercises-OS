@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
     for (q=0; q < L; q++) {
         if (pipe(piped[q]) < 0)        {
             printf("Errore nella creazione della pipe\n");
-            exit(5);
+            exit(4);
         }
 	}
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
 		/* creazione dei figli */
         if ((pid = fork()) < 0) {
             printf ("Errore nella fork\n");
-            exit(6);
+            exit(5);
         }
 
 		if (pid == 0) /* figlio */ {
