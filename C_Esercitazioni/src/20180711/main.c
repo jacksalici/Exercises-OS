@@ -10,6 +10,8 @@
 
 typedef int pipe_t[2];
 
+
+//variabile token per far si che il figlio scriva o meno
 int token = 0;
 
 void salta()
@@ -41,19 +43,17 @@ int massimo(long int *pos, int N)
 int main(int argc, char *argv[])
 {
 
-    int *pid; /* array di pid */
-
-    int N;                          /* numero di caratteri e quindi numero di processi */
+    int *pid;                       /* array di pid */
+    int N;                          /* numero di file e quindi numero di processi */
     int fd;                         /* per open */
     int i, k;                       /* indici, i per i figli! */
-    int cont;                       /* per conteggio */
+    int cont;                       /* per conteggio caratteri letti */
     char c;                         /* per leggere dal file */
     pipe_t *piped;                  /* array dinamico di pipe */
     int pidFiglio, status, ritorno; /* variabili per wait*/
-    long int *pos;
-    long int p;
-    char CZ;
-    //CONTROLLI TIPICI
+    long int *pos;                  /* array dinamico di posizioni */
+    long int p;                     /* posizione nel singolo file*/
+    char CZ;                        /* carattere passato all'utente*/
 
     /* numero dei caratteri passati sulla linea di comando */
     if (argc < 4)
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    N = argc - 2;
+    N = argc - 2; 
 
     if (strlen(argv[1]) != 1)
     {
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     printf("Sono il processo padre con pid%d e sto per generare %d figli\n", getpid(), N);
     for (i = 0; i < N; i++)
     {
-        /* OBBLIGATORIO: creazione dei figli */
+        /* creazione dei figli */
         if ((pid[i] = fork()) < 0)
         {
             printf("Errore nella fork\n");
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
         {
             printf("Figlio %d con pid %d\n", i, getpid());
 
-            /* OBBLIGATORIO: chiude tutte le pipe che non usa (scegli schema chiusura!) */
+            /*  chiude tutte le pipe che non usa (scegli schema chiusura!) */
             for (k = 0; k < N; k++)
             {
                 close(piped[k][0]);
