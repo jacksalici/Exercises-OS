@@ -57,9 +57,25 @@
                     cont++;
             }
             
+//ATTESA DEL PADRE RIGA PER RIGA E POI FILE PER FILE
 
-      
-   
+            /* Il padre recupera le informazioni dai figli: prima in ordine di strutture e quindi in ordine di indice */
+            finito = 0; /* all'inizio supponiamo che non sia finito nessun figlio */
+            while (!finito)
+            {
+                finito = 1; /* mettiamo finito a 1 perche' potrebbero essere finiti tutti i figli */
+                for (i = 0; i < N; i++)
+                {
+                    /* si legge la struttura inviata  dal figlio i-esimo */
+                    nr = read(piped[i][0], &S, sizeof(S));
+                    if (nr != 0)
+                    {
+                        finito = 0;         /* almeno un processo figlio non e' finito */
+                                                                                                                                                                             /* Nota bene: la stampa della linea con il formato %s NON ha problemi perche' il figlio ha passato una stringa */
+                        printf("Il nipote con pid %d ha letto dal file %s nella riga %d questa linea:\n%s", S.pid_nipote, argv[(i * 2) + 1], S.numero_linea, S.linea_letta); /* NOTA BENE: dato che la linea contiene il terminatore di linea nella printf NON abbiamo inserito lo \n alla fine */
+                    }
+                }
+            }
 
 //ATTESA TERMINAZIONE DEI FIGLI   
 
@@ -84,3 +100,6 @@
         exit(0);
     }
 
+//per trasformare carattere in stringa:
+
+sprintf
