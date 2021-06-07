@@ -81,7 +81,7 @@ int main(int argc, char *argv[]){
 
 			/* OBBLIGATORIO: apre il file */
             if ((fd = open(argv[], O_RDONLY)) < 0) { 
-                printf("Errore nella apertura del file %s\n", argv[1]);
+                printf("Errore nella apertura del file %s\n", argv[]);
                 exit(-1);
             }
 
