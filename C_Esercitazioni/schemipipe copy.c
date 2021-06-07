@@ -121,10 +121,32 @@
 								exit(-1);
 							}
 
-/* caso y: comunicazione circolare 
+/* caso y: comunicazione circolare (pipeline)
 	ogni figlio passa al successivo e l'ultimo passa al padre*/
 
-							//?
+
+					/*figlio*/
+
+							//schema pipeline: ogni figlio legge dalla pipe i-1 e scrive sulla i
+							for (k = 0; k < M; k++)
+							{
+								if (k != i)
+									close(piped[k][1]);
+								if (i == 0 || k != i - 1)
+									close(piped[k][0]);
+							}
+					
+					/*padre*/
+
+							/* chiude tutte le pipe che non usa */
+							for (k = 0; k < M; k++)
+							{
+								close(piped[k][1]);
+								if (k != M - 1)
+								{
+									close(piped[k][0]);
+								}
+							}
 
 /* caso x1: comunicazione a ring
 	innesco del padre ma poi il padre non c'entra più */
