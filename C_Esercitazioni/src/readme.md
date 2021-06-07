@@ -32,7 +32,7 @@
 
 20180711
 
-> **figlio-padre con segnali** ogni figlio selezione un certo carattere, manda al padre la sua posizione. Il padre manderà un segnale di stampa al figlio con posizione massima
+> **figlio-padre con segnali** ogni figlio selezione un certo carattere, manda al padre la sua posizione. Il padre manderà un segnale di stampa al figlio con posizione *massima*
 
 20180912
 
@@ -49,6 +49,10 @@
 20190531
 
 > **nipote** il nipote ordina il file, il figlio ritorna la lunghezza dell'ultima riga.
+
+20190619
+
+> **figlio-padre con segnali** ogni figlio selezione il primo carattere di ogni riga del suo file. Il padre manderà un segnale di stampa della linea al figlio con valore *massima*
 
 20190911
 
