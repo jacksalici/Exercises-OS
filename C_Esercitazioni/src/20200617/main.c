@@ -100,7 +100,9 @@ int main(int argc, char *argv[]){
                 exit(-1);
             }
 
-			lseek(F, q*L/B-1, SEEK_SET);
+			
+            //mi posiziono alla posizione giusta e leggo il buffer
+            lseek(F, q*L/B-1, SEEK_SET);
             read(F, buff, L/B);
         
             write(piped[q][1], &buff[L/B-1], 1);

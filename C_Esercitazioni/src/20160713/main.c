@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
 
 	printf("Sono il processo padre con pid%d e sto per generare %d figli\n", getpid(), N);
     for (i=0; i < N; i++) {
-		/* OBBLIGATORIO: creazione dei figli */
+		/*  creazione dei figli */
         if ((pid[i] = fork()) < 0) {
             printf ("Errore nella fork\n");
             exit(6);

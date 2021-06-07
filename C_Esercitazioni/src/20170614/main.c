@@ -95,14 +95,16 @@ int main(int argc, char *argv[])
             {
                 index++;
 
+                //cerco le occorrenze del carattere
                 if (c == Cx){
+                    //ogni volta che ne trovo una comunico al padre, con anche la posizione
                     cont++;
                     printf("Ho letto %c - %ld\n", Cx, index);
                     if(write(pipedFP[i][1], &index, sizeof(index))==-1){
-                        printf("Errore scrittura figlio %d indice %ld\n", i, index);
+                        printf("Errore scrittura figlio %d indice %ld\n", i, index); //controllo che la scrittura sia andata a buon fine
                     };
-                    read(pipedPF[i][0], &c, sizeof(c));
-                    if(c!='\n'){
+                    read(pipedPF[i][0], &c, sizeof(c));//leggo il carattere che mi manda il padre
+                    if(c!='\n'){ //se  è diverso da newline lo sostituisco
                         lseek(fdr, -1L, SEEK_CUR);
                         write(fdr, &c, 1);
                     }
@@ -111,7 +113,7 @@ int main(int argc, char *argv[])
 
 
 
-
+            //esco con il numero di occorrenze del carattere
 			exit(cont);
 		}
 	}
@@ -129,11 +131,16 @@ int main(int argc, char *argv[])
     int finito = 0;
     char c, scarto; //carattere
 
+    //finche tutti i file non sono finiti...
     while(!finito){
         finito = 1;
+        //...leggo per tutti i file...
         for (i=0; i < N; i++){
+            //...la pipeline specifica
             if(read(pipedFP[i][0], &index, sizeof(index))!=0){
-            finito=0;
+            finito=0; //se riesco a leggere il figlio non è ancora terminato
+
+            //leggo un carattere e chiedo all'utente come sostutuirlo
             printf("letto carattere in posizione %ld dal file %s del figlio di indice %d\n", index, argv[i+1], i);
             printf("inserire carattere con cui sostituire, new line se non devo fare nulla\n");
             read(0, &c, 1);

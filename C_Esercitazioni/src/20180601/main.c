@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 		if (pid[i] == 0) /* figlio */ {
             printf("Figlio %d con pid %d\n", i, getpid());
 
-			/* OBBLIGATORIO: chiude tutte le pipe che non usa (scegli schema chiusura!) */
+			/* chiude tutte le pipe che non usa (scegli schema chiusura!) */
             for (k=0; k < N; k++){
                 if(k!=i){
                     close(piped[k][1]);
