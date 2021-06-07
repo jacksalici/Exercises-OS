@@ -1,6 +1,6 @@
 # Indice Esercizi
 
-*in aggiornamento*  
+*in aggiornamento continuo, man mano che svolgo i vecchi esami*  
 
 20160713
 
@@ -17,6 +17,11 @@
 20170913
 
 > **figlio-padre** ogni figlio selezione l'ultima linea del file associato e al manda al padre che la scrive su un nuovo file. [non commentato benissimo]
+
+20180117
+
+> **pipeline e segnali** [molto lungo, forse non troppo chiaro] per ogni linea di ogni file si passa avanti una struct con il maggior numero di occcorrenze di un carattere e di che figlio stiamo parlando. Il padre riceve una struct per linea e manda sengali di stampa della riga al figlio con il maggior numero di occorrenze del carattere
+
 
 20180601
 
