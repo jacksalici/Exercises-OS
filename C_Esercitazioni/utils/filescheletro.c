@@ -37,6 +37,7 @@ int main(int argc, char *argv[]){
     
     N = argc - ;
 
+	printf("Sono stati inseriti %d\n", N);
 
 	//ALLOCAZIONE MEMORIA MALLOC
 
