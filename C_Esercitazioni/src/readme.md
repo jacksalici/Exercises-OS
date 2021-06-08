@@ -58,6 +58,11 @@
 
 > **coppia di figli** il figlio dispari crea un file e ci mette il file maggiore fra ogni coppia di caratteri letta dai file associati al figlio pari e dispari.
 
+20200212
+
+> **coppia di figli** i figli leggono certi caratteri a seconda se sono pari o dispari e mandano al padre una struct con il risultato dei conteggi
+
+
 20200610
 
 > **figlio-padre** ogni figlio manda al padre le linee che rispettano certi paramentri [non commentato benissimo]
