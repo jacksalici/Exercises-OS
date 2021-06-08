@@ -92,4 +92,8 @@
 
 20210121
 
-> **schema ring** il padre serve solo da innesco. i figli leggono un carattere ad ogni giro 
+> **schema ring** il padre serve solo da innesco. i figli leggono un carattere ad ogni giro. *mancano dei controlli, vedi esame seguente*
+
+20210121
+
+> **schema ring** il padre serve solo da innesco. i figli stampano le righe del loro file. *Controlli fatti bene*
