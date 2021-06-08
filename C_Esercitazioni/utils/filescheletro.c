@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 
     int N;   							/* numero di caratteri e quindi numero di processi */
     int fd;      						/* per open */
-    int i, k;     						/* indici, i per i figli! */
+    int i, j, k;     						/* indici, i per i figli! */
     int cont;     						/* per conteggio */
     char c;       						/* per leggere dal file */
     pipe_t *piped;    					/* array dinamico di pipe */
@@ -78,6 +78,9 @@ int main(int argc, char *argv[]){
             printf("Figlio %d con pid %d\n", i, getpid());
 
 			/* OBBLIGATORIO: chiude tutte le pipe che non usa (scegli schema chiusura!) */
+			for(j = 0; j < N; j++){
+
+			}
 
 			/* OBBLIGATORIO: apre il file */
             if ((fd = open(argv[], O_RDONLY)) < 0) { 
@@ -96,7 +99,10 @@ int main(int argc, char *argv[]){
 	printf("Padre con PID: %d\n", getpid());
     
     /* OBBLIGATORIO: chiude tutte le pipe che non usa */
+	for(j = 0; j < N; j++){
 
+	}
+	
 	/* legge dalle pipe i messaggi o manda segnali?*/
 
 	//ATTESA TERMINAZIONE DEI FIGLI   
