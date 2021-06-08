@@ -16,6 +16,11 @@
 
 > **pipeline** si trasmette un vettore contenente il numero di occorrente del carattere assegnato ad ogni figlio. il padre infine riordina con il *bubblesort* il vettore e stampa tutto [non commentato bene, manca qualche controllo] 
 
+20170526
+
+> **pipeline:** ogni figlio è associato ad un file, e ci si passa una struct con il numero massimo e la somma di delle occorrenze di un carattere.
+
+
 20170614
 
 > **padre-figlio e figlio-padre** ogni figlio cerca un carattere e, ogni volta che trova un'occorrenza chiede al padre come sostituirlo
