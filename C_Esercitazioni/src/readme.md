@@ -2,6 +2,12 @@
 
 *in aggiornamento continuo, man mano che svolgo i vecchi esami*  
 
+
+20160608
+
+> **padre-figlio e figlio-padre** ogni figlio manda la lunghezza della riga, il padre manda una posizione casuale fra tutte le lunghezze delle righe, se esiste per il singolo figlio stampo su un file creato
+
+
 20160713
 
 > **padre-figlio e figlio-padre** dopo che il padre dice a ogni figlio un divisore, mandiamo da ogni figlio i caratteri multipli
