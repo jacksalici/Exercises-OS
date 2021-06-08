@@ -128,7 +128,7 @@
 					/*figlio*/
 
 							//schema pipeline: ogni figlio legge dalla pipe i-1 e scrive sulla i
-							for (k = 0; k < M; k++)
+							for (k = 0; k < N; k++)
 							{
 								if (k != i)
 									close(piped[k][1]);
@@ -139,10 +139,10 @@
 					/*padre*/
 
 							/* chiude tutte le pipe che non usa */
-							for (k = 0; k < M; k++)
+							for (k = 0; k < N; k++)
 							{
 								close(piped[k][1]);
-								if (k != M - 1)
+								if (k != N - 1)
 								{
 									close(piped[k][0]);
 								}
@@ -157,17 +157,17 @@
 						        printf("Figlio %d con pid %d\n", q, getpid());
 						
 								/* chiusura per schema a ring: */
-								for (j=0; j < Q; j++){
+								for (j=0; j < N; j++){
 									if(j != q)
 										close(piped[j][0]);			// in lettura lascio aperta la pipe con lo stesso indice del figlio
-									if(j != ((q+1) % Q))
+									if(j != ((q+1) % N))
 										close(piped[j][1]);			// in scrittura lascio aperta la pipe ...
 								}
 						
 								/* codice */
 						
 								read(piped[q][0], &ok, 1);			// leggo dalla pipe dell'indice del figlio
-								write(piped[(q+1)%Q][1], &ok, 1); 	// scrivo sulla pipe "successiva" al figlio
+								write(piped[(q+1)%N][1], &ok, 1); 	// scrivo sulla pipe "successiva" al figlio
 						
 								/* codice */
 							}
@@ -177,7 +177,7 @@
 							printf("Sono il padre (pid: %d)\n", getpid());
 							   
 						    /* chiude tutte le pipe che non usa */
-							for(q = 1; q < Q; q++){
+							for(q = 1; q < N; q++){
 								close(piped[q][0]);			// tengo aperto la pipe[0] in scrittura per l'innesco 
 								close(piped[q][1]);			// e pipe[0] in lettura per evitare il sigpipe dell'ultimo figlio nell'ultima scrittura
 							}
@@ -191,14 +191,14 @@
 /* caso x2: comunicazione a ring
 	innesco del padre che rimane nel ciclo di pipe */
 
-							/* OBBLIGATORIO: allocazione Q+1 pipe */
-   							if ((piped=(pipe_t *)malloc((Q+1)*sizeof(pipe_t))) == NULL)    {
+							/* OBBLIGATORIO: allocazione N+1 pipe */
+   							if ((piped=(pipe_t *)malloc((N+1)*sizeof(pipe_t))) == NULL)    {
    								printf("Errore allocazione pipe\n");
    								exit(3); 
    							}
 
-								/* OBBLIGATORIO: creo Q+1 pipe */
-   							for(q=0; q <= Q; q++) {
+								/* OBBLIGATORIO: creo N+1 pipe */
+   							for(q=0; q <= N; q++) {
    							    if (pipe(piped[q]) < 0)        {
    							        printf("Errore nella creazione della pipe\n");
    							        exit(1);
@@ -209,7 +209,7 @@
 										printf("Figlio %d con pid %d\n", q, getpid());
 
 										/* chiusura per schema a ring: */
-										for (j=0; j <= Q; j++){
+										for (j=0; j <= N; j++){
 											if(j != q)
 												close(piped[j][0]);			// in lettura lascio aperta la pipe con lo stesso indice del figlio
 											if(j != (q+1))
@@ -225,17 +225,17 @@
    							printf("Sono il padre (pid: %d)\n", getpid());
 
    							/* chiude tutte le pipe che non usa */
-								for(q = 0; q <= Q; q++){
+								for(q = 0; q <= N; q++){
 									if(q != 0)
 										close(piped[q][1]);			// tengo aperto la pipe[0] in scrittura per l'innesco 
-									if(q != Q)
+									if(q != N)
 										close(piped[q][0]);			// e pipe[0] in lettura per evitare il sigpipe dell'ultimo figlio nell'ultima 	scrittura
 								}
 
 								for(linea = 1; linea <= L; linea++) {
 									printf("\nLinea %d\n", linea);
 									write(piped[0][1], &ok, sizeof(char));		// lancio l'innesco a ogni giro
-									read(piped[Q][0], &ok, 1);					// leggo dall'ultimo figlio
+									read(piped[N][0], &ok, 1);					// leggo dall'ultimo figlio
 								}
 
 								close(piped[0][1]);							// posso chiudere la pipe iniziale di scrittura
